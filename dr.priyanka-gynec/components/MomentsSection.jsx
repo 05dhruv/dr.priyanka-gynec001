@@ -6,14 +6,11 @@ import Reveal from "./Reveal";
 
 export default function MomentsSection() {
   return (
-    <section className="py-24 md:py-32 bg-cream-deep">
+    <section className="py-14 md:py-22 bg-cream text-green-900">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal className="text-center max-w-2xl mx-auto mb-14">
-          <p className="leaf-divider justify-center text-wine text-xs tracking-[0.3em] uppercase mb-5">
-            Our Journey
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl">
-            Moments that <span className="italic-accent">Move Us</span>
+          <h2 className="font-display text-4xl md:text-5xl text-green-800">
+            Moments that <span className="italic-accent !text-green-800">Move Us</span>
           </h2>
         </Reveal>
 
@@ -30,7 +27,7 @@ export default function MomentsSection() {
                 whileHover={{ scale: 1.1 }}
                 className="w-20 h-20 rounded-full bg-cream/95 flex items-center justify-center shadow-xl"
               >
-                <Play size={26} className="text-wine ml-1" fill="currentColor" />
+                <Play size={26} className="text-emerald-900 ml-1" fill="currentColor" />
               </motion.span>
               <p className="font-display italic text-cream/90 text-lg">
                 Watch stories from Dr. Priyanka Gynec

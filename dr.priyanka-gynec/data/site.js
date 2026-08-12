@@ -1,15 +1,12 @@
 export const siteInfo = {
   name: "Dr. Priyanka Gynec",
   tagline: "Her Health First",
-  address: "679, 11th Main Road, 36th Cross, 4th Block, Jayanagar, Bengaluru 560 011",
+  address: "A-2 Gandhi Nagar, Moradabad",
   email: "contact@Dr. Priyankagynec.com",
   phones: [
-    { label: "+91 80 2244 1314", href: "tel:918022441314" },
-    { label: "+91 80 2244 6262", href: "tel:918022446262" },
-    { label: "+91 95917 87988", href: "tel:919591787988" },
-    { label: "+91 76767 79106", href: "tel:917676779106" },
+    { label: "+91 90 7976 5578", href: "tel:919079765578" },
   ],
-  whatsapp: { label: "+91 76767 79106", href: "https://wa.me/917676779106" },
+  whatsapp: { label: "+91 96 8032 1761", href: "https://wa.me/919680321761" },
   socials: [
     { label: "Facebook", href: "https://www.facebook.com/people/Dr. Priyanka-Gynec/61586318647453/" },
     { label: "Instagram", href: "https://www.instagram.com/Dr. Priyanka_gynec/" },
@@ -19,15 +16,15 @@ export const siteInfo = {
 };
 
 export const navLinks = [
-  { label: "About Us", href: "/about-us" },
+  { label: "About Us", href: "/" },
   {
     label: "Specialities",
     href: "/services",
     children: [
-      { label: "Fertility & IVF", href: "/services/fertility-ivf" },
-      { label: "Laparoscopy & Gynecology", href: "/services/laparoscopy-gynecology" },
-      { label: "Pregnancy & Birthing", href: "/services/pregnancy-birthing" },
-      { label: "Paediatrics", href: "/services/paediatrics" },
+      { label: "Fertility & IVF", href: "/" },
+      { label: "Laparoscopy & Gynecology", href: "/" },
+      { label: "Pregnancy & Birthing", href: "/" },
+      { label: "Paediatrics", href: "/" },
     ],
   },
   { label: "Blogs", href: "/blogs" },

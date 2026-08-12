@@ -128,7 +128,7 @@ export default function Navbar() {
         {/* Primary CTA Button matching shanthigynec.com */}
         <div className="flex items-center gap-4">
           <a
-            href="#contact-numbers"
+            href="/"
             className="hidden md:inline-flex items-center justify-center rounded-full bg-[#e181b5] text-[#fbf2f2] font-display italic text-[1.125rem] px-6 py-2.5 border border-[#e181b5] hover:bg-transparent hover:text-[#e181b5] transition-all duration-500 shadow-sm"
           >
             Call for Appointment
