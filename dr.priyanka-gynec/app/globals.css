@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #fbf5ee;
+  --color-cream-deep: #f3e8da;
+  --color-ink: #2a201d;
+  --color-wine: #6f2338;
+  --color-wine-deep: #501828;
+  --color-rose: #c98a8f;
+  --color-sage: #7c8b6f;
+  --color-gold: #b68a4e;
+  --font-display: "Cormorant Garamond", "Fraunces Fallback", Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  --font-sans: "Manrope Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-wine);
+  color: var(--color-cream);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.italic-accent {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--color-wine);
+}
+
+.leaf-divider {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.leaf-divider::before,
+.leaf-divider::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.grain-bg {
+  position: relative;
+  isolation: isolate;
+}
+
+.grain-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  z-index: -1;
+  background-image: radial-gradient(var(--color-wine) 0.5px, transparent 0.5px);
+  background-size: 18px 18px;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
