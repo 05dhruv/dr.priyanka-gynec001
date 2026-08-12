@@ -19,7 +19,7 @@ export const navLinks = [
   { label: "About Us", href: "/" },
   {
     label: "Specialities",
-    href: "/services",
+    href: "/",
     children: [
       { label: "Fertility & IVF", href: "/" },
       { label: "Laparoscopy & Gynecology", href: "/" },
@@ -27,8 +27,8 @@ export const navLinks = [
       { label: "Paediatrics", href: "/" },
     ],
   },
-  { label: "Blogs", href: "/blogs" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "Blogs", href: "/" },
+  { label: "Contact Us", href: "/" },
 ];
 
 export const services = [
