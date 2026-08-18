@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
-import SpecialityCard from "@/components/SpecialityCard";
+import ExploreMoreSpecialities from "@/components/ExploreMoreSpecialities";
 import Testimonials from "@/components/Testimonials";
 import CTASection from "@/components/CTASection";
 import { iconMap } from "@/components/icons";
@@ -27,14 +27,13 @@ export default async function ServiceDetailPage({ params }) {
   if (!service) notFound();
 
   const Icon = iconMap[service.icon];
-  const otherServices = services.filter((s) => s.slug !== service.slug);
   const [titleStart, ...rest] = service.title.split(" ");
 
   return (
     <>
       <PageHero eyebrow="Speciality Service" title={titleStart} italic={rest.join(" ")} description={service.blurb} />
 
-      <section className="py-24 md:py-32 bg-cream">
+      <section className="py-16 md:py-24 bg-cream">
         <div className="mx-auto max-w-6xl px-6 md:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 items-start">
             <div className="lg:col-span-7">
@@ -63,7 +62,7 @@ export default async function ServiceDetailPage({ params }) {
 
             <div className="lg:col-span-5">
               <Reveal delay={0.15}>
-                <div className="rounded-[32px] bg-gradient-to-br from-wine via-wine-deep to-[#2f0d17] grain-bg p-10 text-cream sticky top-28">
+                <div className="rounded-[32px] bg-gradient-to-br from-wine via-wine-deep to-[#2f0d17] grain-bg p-8 sm:p-10 text-cream sticky top-28">
                   <p className="font-display italic text-2xl text-cream mb-4">Her Health First</p>
                   <p className="text-cream/75 leading-relaxed mb-8">
                     Every treatment plan at Dr. Priyanka Gynec begins with listening. Speak
@@ -83,23 +82,8 @@ export default async function ServiceDetailPage({ params }) {
         </div>
       </section>
 
-      <section className="py-24 md:py-32 bg-cream-deep">
-        <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <Reveal className="max-w-xl mb-14">
-            <p className="leaf-divider text-wine text-xs tracking-[0.3em] uppercase mb-5">
-              Explore More
-            </p>
-            <h2 className="font-display text-4xl md:text-5xl leading-[1.05] text-balance">
-              Other <span className="italic-accent">specialities</span>
-            </h2>
-          </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {otherServices.map((s, i) => (
-              <SpecialityCard key={s.slug} service={s} index={i} variant="home" />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* EXPLORE MORE OTHER SPECIALITIES GRID */}
+      <ExploreMoreSpecialities currentSlug={slug} />
 
       <Testimonials />
       <CTASection />

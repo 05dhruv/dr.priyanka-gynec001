@@ -140,7 +140,7 @@ export default function SpecialityScroll() {
 
                   {/* Content */}
                   <div className="flex-1">
-                    <h3 className="font-serif text-[#004b28] text-3xl xl:text-4xl leading-tight mb-3">
+                    <h3 className="font-serif text-[#004b28] text-4xl xl:text-5xl leading-tight mb-3">
                       {item.title}
                     </h3>
 
@@ -250,7 +250,7 @@ export default function SpecialityScroll() {
                       className="
                         font-serif
                         text-[#004b28]
-                        text-[20px]
+                        text-[24px]
                         leading-tight
                         mb-2
                       "

@@ -75,13 +75,13 @@ export default function Footer() {
             <h4 className="font-display italic text-lg mb-4 text-[#004b28]">Quick Links</h4>
             <ul className="space-y-2.5 text-sm text-[#14271d]/75">
               <li><Link href="/" className="hover:text-[#004b28] hover:underline transition-colors">Home</Link></li>
-              <li><Link href="/" className="hover:text-[#004b28] hover:underline transition-colors">About Us</Link></li>
-              <li><Link href="/" className="hover:text-[#004b28] hover:underline transition-colors">Our Services</Link></li>
-              <li><Link href="/" className="hover:text-[#004b28] hover:underline transition-colors">Laparoscopy & Gynecology</Link></li>
-              <li><Link href="/" className="hover:text-[#004b28] hover:underline transition-colors">Pregnancy & Birthing</Link></li>
-              <li><Link href="/" className="hover:text-[#004b28] hover:underline transition-colors">Fertility & IVF</Link></li>
-              <li><Link href="/" className="hover:text-[#004b28] hover:underline transition-colors">Paediatric Care</Link></li>
-              <li><Link href="/" className="hover:text-[#004b28] hover:underline transition-colors">Contact Us</Link></li>
+              <li><Link href="/about-us " className="hover:text-[#004b28] hover:underline transition-colors">About Us</Link></li>
+              <li><Link href="/services" className="hover:text-[#004b28] hover:underline transition-colors">Our Services</Link></li>
+              <li><Link href="/services/laparoscopy-gynecology" className="hover:text-[#004b28] hover:underline transition-colors">Laparoscopy & Gynecology</Link></li>
+              <li><Link href="/services/pregnancy-birthing" className="hover:text-[#004b28] hover:underline transition-colors">Pregnancy & Birthing</Link></li>
+              <li><Link href="/services/fertility-ivf" className="hover:text-[#004b28] hover:underline transition-colors">Fertility & IVF</Link></li>
+              <li><Link href="/services/paediatric-care" className="hover:text-[#004b28] hover:underline transition-colors">Paediatric Care</Link></li>
+              <li><Link href="/contact" className="hover:text-[#004b28] hover:underline transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 

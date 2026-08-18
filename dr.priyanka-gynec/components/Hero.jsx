@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-[#fbf2f2]">
       {/* IMAGE BAND */}
-      <div className="relative h-[56svh] min-h-[380px] w-full sm:h-[60svh] md:h-[65vh] md:min-h-[560px] lg:h-[93vh]">
+      <div className="relative w-full h-[50svh] min-h-[320px] sm:h-[70svh] md:h-[65vh] md:min-h-[560px] lg:h-[93vh]">
         <motion.div
           initial={{ scale: 1.025, opacity: 0.92 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -24,6 +24,9 @@ export default function Hero() {
             src="https://res.cloudinary.com/dv9tivfvq/image/upload/v1786294076/women-holding-baby-1_h4e8ge.webp"
             alt="Happy family mother, grandmother and baby"
             fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center md:object-center"
           />
           <div className="absolute inset-0 bg-[#17301e]/[0.07]" />
         </motion.div>
@@ -76,11 +79,11 @@ export default function Hero() {
         >
 
           <a
-  href="#contact-numbers"
-  className="inline-flex items-center justify-center rounded-full bg-[#e181b5] text-[#fbf2f2] font-display italic text-base md:text-[1.125rem] px-5 md:px-6 py-2.5 border border-[#e181b5] hover:bg-transparent hover:text-[#004b28] transition-all duration-500 shadow-sm"
->
-  Call for Appointment
-</a>
+            href="#contact-numbers"
+            className="inline-flex items-center justify-center rounded-full bg-[#e181b5] text-[#fbf2f2] font-display italic text-base md:text-[1.125rem] px-5 md:px-6 py-2.5 border border-[#e181b5] hover:bg-transparent hover:text-[#004b28] transition-all duration-500 shadow-sm"
+          >
+            Call for Appointment
+          </a>
         </motion.div>
       </div>
     </section>

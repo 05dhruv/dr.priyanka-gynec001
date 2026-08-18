@@ -20,8 +20,10 @@ export default function ServiceCard({ service, index = 0 }) {
           {Icon && <Icon size={26} strokeWidth={1.7} />}
         </div>
 
-        <h3 className="font-display text-2xl md:text-3xl text-[#004b28] font-medium leading-tight mb-3">
-          {service.title}
+        <h3 className="font-display text-3xl md:text-4xl text-[#004b28] font-medium leading-tight mb-3">
+          <Link href={`/services/${service.slug}`} className="hover:text-[#e181b5] transition-colors">
+            {service.title}
+          </Link>
         </h3>
 
         <p className="text-[#111111]/80 text-base leading-relaxed mb-6">
