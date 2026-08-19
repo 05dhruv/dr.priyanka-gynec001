@@ -34,39 +34,30 @@ function getServiceIcon(service) {
 
   const iconMap = {
     /* Main Services */
-
     "fertility-ivf": FlaskConical,
-
     "pregnancy-birthing": HeartPulse,
-
+    "antenatal-services": HeartPulse,
     paediatrics: Baby,
-
     "laparoscopy-gynecology": Microscope,
 
     /* Laparoscopic Services */
-
     cystectomy: CircleDot,
-
+    "laparoscopic-cystectomy": CircleDot,
     myomectomy: Activity,
-
+    "laparoscopic-myomectomy": Activity,
     hysterectomy: Scissors,
-
+    "laparoscopic-hysterectomy": Scissors,
     sacrocolpopexy: Bone,
-
     sterilization: ShieldCheck,
 
     /* Hysteroscopy */
-
     "diagnostic-hysteroscopy": Search,
-
     polypectomy: ClipboardPlus,
 
     /* Maternity */
-
     "normal-delivery": Baby,
 
     /* Endometriosis */
-
     "endometriosis-surgery": HeartPulse,
   };
 

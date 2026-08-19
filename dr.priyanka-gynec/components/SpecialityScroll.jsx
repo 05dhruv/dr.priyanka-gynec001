@@ -1,73 +1,62 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
+import {
+  FlaskConical,
+  HeartPulse,
+  Baby,
+  Microscope,
+  CircleDot,
+  Activity,
+  Scissors,
+  Bone,
+  ShieldCheck,
+  Search,
+  ClipboardPlus,
+  Stethoscope,
+  Sparkles,
+} from "lucide-react";
+import { services as siteServices } from "@/data/site";
 
-const specialities = [
-  {
-    title: "Gynecology & Laparoscopy",
-    description:
-      "Expert care for women's reproductive health needs.",
-    link: "/services/laparoscopy-gynecology",
-    image:
-      "https://res.cloudinary.com/dv9tivfvq/image/upload/v1786294076/clipping-flower-on-hair_qjjjl5.webp",
-  },
-  {
-    title: "Pregnancy & Birthing Care",
-    description:
-      "Supportive and customized birthing experiences await.",
-    link: "/services/pregnancy-birthing",
-    image:
-      "https://res.cloudinary.com/dv9tivfvq/image/upload/v1786294075/healing-with-ayurleaves_ryvkrj.webp",
-  },
-  {
-    title: "Fertility & IVF",
-    description:
-      "Personalized fertility treatments to help you conceive.",
-    link: "/services/fertility-ivf",
-    image:
-      "https://res.cloudinary.com/dv9tivfvq/image/upload/v1786294075/holding-tummy-with-hands_b5zo5f.webp",
-  },
-  {
-    title: "Paediatric Care",
-    description:
-      "Comprehensive paediatric services for your little ones.",
-    link: "/services/paediatrics",
-    image:
-      "https://res.cloudinary.com/dv9tivfvq/image/upload/v1786294075/tweo-girls-pausing_epbseb.webp",
-  },
-];
+function getServiceIcon(slug) {
+  const map = {
+    "laparoscopy-gynecology": Microscope,
+    "fertility-ivf": FlaskConical,
+    "pregnancy-birthing": HeartPulse,
+    "antenatal-services": HeartPulse,
+    paediatrics: Baby,
+    cystectomy: CircleDot,
+    "laparoscopic-cystectomy": CircleDot,
+    myomectomy: Activity,
+    "laparoscopic-myomectomy": Activity,
+    hysterectomy: Scissors,
+    "laparoscopic-hysterectomy": Scissors,
+    sacrocolpopexy: Bone,
+    sterilization: ShieldCheck,
+    "diagnostic-hysteroscopy": Search,
+    polypectomy: ClipboardPlus,
+    "normal-delivery": Baby,
+    "endometriosis-surgery": Sparkles,
+  };
+  return map[slug] || Stethoscope;
+}
 
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 80,
-    scale: 0.95,
-  },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.8,
-      delay: i * 0.15,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  }),
-};
+export default function SpecialityScroll({ services: propServices }) {
+  const displayServices =
+    Array.isArray(propServices) && propServices.length > 0
+      ? propServices
+      : siteServices;
 
-export default function SpecialityScroll() {
   return (
-    <section className="bg-[#fbf5ee] py-18 lg:py-18 overflow-hidden">
+    <section className="bg-[#fbf5ee] py-20 lg:py-24 relative">
       <div className="max-w-[1700px] mx-auto px-5 lg:px-12">
         {/* =========================
-            DESKTOP VERSION
+            DESKTOP VERSION (STICKY CARD STACKING)
         ========================== */}
-        <div className="hidden lg:grid lg:grid-cols-[0.8fr_1.2fr] gap-20">
-
+        <div className="hidden lg:grid lg:grid-cols-[0.8fr_1.2fr] gap-20 items-start">
           {/* Left Sticky Heading */}
-          <div className="sticky top-28 h-fit">
+          <div className="sticky top-28 h-fit self-start">
             <h2
               className="
                 font-serif
@@ -89,97 +78,108 @@ export default function SpecialityScroll() {
             </h2>
           </div>
 
-          {/* Right Side Cards */}
-          <div className="space-y-8">
+          {/* Right Side Sticky Stacked Cards */}
+          <div className="relative space-y-6 pb-20">
+            {displayServices.map((item, index) => {
+              const itemTitle = item.short || item.title;
+              const itemDesc = item.homeBlurb || item.blurb;
+              const itemLink = item.link || `/services/${item.slug}`;
+              const IconComponent = getServiceIcon(item.slug);
 
-            {specialities.map((item, index) => (
-              <motion.div
-                key={index}
-                custom={index}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.25 }}
-                whileHover={{
-                  scale: 1.02,
-                  transition: { duration: 0.3 },
-                }}
-                className="
-                  rounded-[999px]
-                  bg-[#f5e7d8]
-                  border
-                  border-[#ebd7c5]
-                  overflow-hidden
-                  px-6
-                  py-4
-                  shadow-[0_10px_30px_rgba(7,85,64,0.06)]
-                "
-              >
-                <div className="flex items-center gap-4">
+              // Calculate top offset so cards stack cleanly like an overlapping deck
+              const topOffset = 110 + Math.min(index * 8, 80);
 
- {/* Circle Placeholder */}
- <div
-  className="
-    relative
-    w-[130px]
-    h-[130px]
-    rounded-full
-    overflow-hidden
-    shrink-0
-    border-[5px]
-    border-[#9ecaba]
-  "
->
-  <Image
-    src={item.image}
-    alt={item.title}
-    fill
-    className="object-cover object-center"
-  />
-</div>
-
-                  {/* Content */}
-                  <div className="flex-1">
-                    <h3 className="font-serif text-[#004b28] text-4xl xl:text-5xl leading-tight mb-3">
-                      {item.title}
-                    </h3>
-
-                    <p className="text-[#1b4332] text-base leading-relaxed mb-5 max-w-xl">
-                      {item.description}
-                    </p>
-
-                    <Link
-                      href={item.link}
+              return (
+                <motion.div
+                  key={item.slug || index}
+                  style={{
+                    position: "sticky",
+                    top: `${topOffset}px`,
+                    zIndex: index + 10,
+                  }}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="
+                    rounded-[999px]
+                    bg-[#f5e7d8]
+                    border
+                    border-[#ebd7c5]
+                    overflow-hidden
+                    px-7
+                    py-5
+                    shadow-[0_16px_40px_rgba(7,85,64,0.1)]
+                    hover:shadow-[0_20px_50px_rgba(7,85,64,0.16)]
+                    transition-all
+                    duration-300
+                  "
+                >
+                  <div className="flex items-center gap-6">
+                    {/* Circle Icon Frame */}
+                    <div
                       className="
-                        inline-flex
+                        relative
+                        w-[125px]
+                        h-[125px]
+                        rounded-full
+                        shrink-0
+                        border-[5px]
+                        border-[#9ecaba]
+                        bg-gradient-to-br
+                        from-[#004b28]
+                        via-[#075540]
+                        to-[#004b28]
+                        flex
                         items-center
-                        gap-3
-                        text-[#004b28]
-                        hover:text-[#075540]
-                        italic
-                        text-xl
-                        hover:gap-5
-                        transition-all
+                        justify-center
+                        shadow-md
                       "
                     >
-                      Know More
-                      <span>→</span>
-                    </Link>
+                      <IconComponent className="w-13 h-13 text-[#f5e7d8]" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-serif text-[#004b28] text-3xl xl:text-4xl leading-tight mb-2">
+                        {itemTitle}
+                      </h3>
+
+                      <p className="text-[#1b4332] text-sm xl:text-base leading-relaxed mb-4 max-w-xl line-clamp-2">
+                        {itemDesc}
+                      </p>
+
+                      <Link
+                        href={itemLink}
+                        className="
+                          inline-flex
+                          items-center
+                          gap-3
+                          text-[#004b28]
+                          hover:text-[#075540]
+                          italic
+                          text-lg
+                          hover:gap-5
+                          transition-all
+                          font-medium
+                        "
+                      >
+                        Know More
+                        <span>→</span>
+                      </Link>
+                    </div>
                   </div>
-
-                </div>
-              </motion.div>
-            ))}
-
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 
         {/* =========================
-            MOBILE VERSION
+            MOBILE VERSION (STICKY CARD STACKING)
         ========================== */}
         <div className="lg:hidden">
-
-          <div className="text-center mb-6">
+          <div className="text-center mb-8">
             <h2
               className="
                 font-serif
@@ -199,98 +199,114 @@ export default function SpecialityScroll() {
             </h2>
           </div>
 
-          <div className="space-y-4">
+          <div className="relative space-y-4 pb-12">
+            {displayServices.map((item, index) => {
+              const itemTitle = item.short || item.title;
+              const itemDesc = item.homeBlurb || item.blurb;
+              const itemLink = item.link || `/services/${item.slug}`;
+              const IconComponent = getServiceIcon(item.slug);
 
-            {specialities.map((item, index) => (
-              <motion.div
-                key={index}
-                custom={index}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                whileTap={{ scale: 0.98 }}
-                className="
-                  rounded-[999px]
-                  bg-[#f5e7d8]
-                  border
-                  border-[#ebd7c5]
-                  overflow-hidden
-                  px-6
-                  py-4
-                  shadow-[0_6px_20px_rgba(7,85,64,0.06)]
-                "
-              >
-                <div className="flex items-center gap-4">
-{/* Circle Image */}
-<div
-  className="
-    relative
-    w-24
-    h-24
-    rounded-full
-    overflow-hidden
-    shrink-0
-    border-4
-    border-[#9ecaba]
-  "
->
-  <Image
-    src={item.image}
-    alt={item.title}
-    fill
-    className="object-cover object-center"
-  />
-</div>
+              const mobileTopOffset = 80 + Math.min(index * 6, 60);
 
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-
-                    <h3
+              return (
+                <motion.div
+                  key={item.slug || index}
+                  style={{
+                    position: "sticky",
+                    top: `${mobileTopOffset}px`,
+                    zIndex: index + 10,
+                  }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ duration: 0.4 }}
+                  className="
+                    rounded-[40px] sm:rounded-[999px]
+                    bg-[#f5e7d8]
+                    border
+                    border-[#ebd7c5]
+                    overflow-hidden
+                    px-5
+                    py-4
+                    shadow-[0_10px_30px_rgba(7,85,64,0.12)]
+                  "
+                >
+                  <div className="flex items-center gap-4">
+                    {/* Circle Icon Frame */}
+                    <div
                       className="
-                        font-serif
-                        text-[#004b28]
-                        text-[24px]
-                        leading-tight
-                        mb-2
-                      "
-                    >
-                      {item.title}
-                    </h3>
-
-                    <p
-                      className="
-                        text-[#1b4332]
-                        text-sm
-                        leading-relaxed
-                        mb-3
-                      "
-                    >
-                      {item.description}
-                    </p>
-
-                    <Link
-                      href={item.link}
-                      className="
-                        inline-flex
+                        relative
+                        w-20
+                        h-20
+                        sm:w-24
+                        sm:h-24
+                        rounded-full
+                        shrink-0
+                        border-4
+                        border-[#9ecaba]
+                        bg-gradient-to-br
+                        from-[#004b28]
+                        via-[#075540]
+                        to-[#004b28]
+                        flex
                         items-center
-                        gap-2
-                        text-[#004b28]
-                        hover:text-[#075540]
-                        italic
-                        text-sm
+                        justify-center
+                        shadow-sm
                       "
                     >
-                      Know More
-                      <span>→</span>
-                    </Link>
+                      <IconComponent className="w-9 h-9 sm:w-11 sm:h-11 text-[#f5e7d8]" />
+                    </div>
 
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <h3
+                        className="
+                          font-serif
+                          text-[#004b28]
+                          text-[20px]
+                          sm:text-[24px]
+                          leading-tight
+                          mb-1.5
+                        "
+                      >
+                        {itemTitle}
+                      </h3>
+
+                      <p
+                        className="
+                          text-[#1b4332]
+                          text-xs
+                          sm:text-sm
+                          leading-relaxed
+                          mb-2
+                          line-clamp-2
+                        "
+                      >
+                        {itemDesc}
+                      </p>
+
+                      <Link
+                        href={itemLink}
+                        className="
+                          inline-flex
+                          items-center
+                          gap-2
+                          text-[#004b28]
+                          hover:text-[#075540]
+                          italic
+                          text-xs
+                          sm:text-sm
+                          font-medium
+                        "
+                      >
+                        Know More
+                        <span>→</span>
+                      </Link>
+                    </div>
                   </div>
-
-                </div>
-              </motion.div>
-            ))}
-
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>

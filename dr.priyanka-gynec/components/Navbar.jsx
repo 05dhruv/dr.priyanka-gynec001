@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, Phone } from "lucide-react";
 import { navLinks, siteInfo } from "@/data/site";
+import AppointmentModal from "@/components/AppointmentModal";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [dropdown, setDropdown] = useState(false);
+  const [mobileSpecialitiesOpen, setMobileSpecialitiesOpen] = useState(false);
+  const [appointmentModalOpen, setAppointmentModalOpen] = useState(false);
 
   const pathname = usePathname();
 
@@ -59,10 +62,24 @@ export default function Navbar() {
   useEffect(() => {
     setDropdown(false);
     setOpen(false);
+    setMobileSpecialitiesOpen(false);
   }, [pathname]);
 
+  /* =====================================================
+     AUTO OPEN APPOINTMENT POPUP AFTER 4 SECONDS ON PAGE LOAD / REFRESH
+  ===================================================== */
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAppointmentModalOpen(true);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <header
+    <>
+      <header
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
         isHomePage
           ? scrolled
@@ -177,12 +194,13 @@ export default function Navbar() {
         ===================================================== */}
 
         <div className="flex items-center gap-4">
-          <a
-            href="#contact-numbers"
-            className="hidden md:inline-flex items-center justify-center rounded-full bg-[#e181b5] text-[#fbf2f2] font-display italic text-[1.125rem] px-6 py-2.5 border border-[#e181b5] hover:bg-transparent hover:text-[#e181b5] transition-all duration-500 shadow-sm"
+          <button
+            type="button"
+            onClick={() => setAppointmentModalOpen(true)}
+            className="hidden md:inline-flex items-center justify-center rounded-full bg-[#e181b5] text-[#fbf2f2] font-display italic text-[1.125rem] px-6 py-2.5 border border-[#e181b5] hover:bg-[#fbf2f2] hover:border-[#004b28] hover:text-[#004b28] transition-all duration-500 shadow-sm cursor-pointer"
           >
-            Call for Appointment
-          </a>
+            Book Appointment
+          </button>
 
           {/* MOBILE MENU BUTTON */}
 
@@ -317,61 +335,115 @@ export default function Navbar() {
             className="lg:hidden overflow-hidden bg-[#fbf5ee] border-t border-[#e181b5]/20 shadow-xl"
           >
             <div className="px-6 py-6 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <div
-                  key={link.label}
-                  className="border-b border-[#004b28]/10 py-1"
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="block py-3 text-xl font-display italic text-[#004b28] hover:text-[#e181b5] transition-colors"
+              {navLinks.map((link) => {
+                const hasChildren = link.children && link.children.length > 0;
+
+                return (
+                  <div
+                    key={link.label}
+                    className="border-b border-[#004b28]/10 py-1"
                   >
-                    {link.label}
-                  </Link>
+                    <div className="flex items-center justify-between">
+                      <Link
+                        href={link.href}
+                        onClick={() => {
+                          setOpen(false);
+                          setMobileSpecialitiesOpen(false);
+                        }}
+                        className="py-3 text-xl font-display italic text-[#004b28] hover:text-[#e181b5] transition-colors"
+                      >
+                        {link.label}
+                      </Link>
 
-                  {/* MOBILE SPECIALITIES */}
-
-                  {link.children && (
-                    <div className="pl-4 pb-3 flex flex-col gap-3">
-                      {link.children.map((col) => (
-                        <div
-                          key={col.category}
-                          className="flex flex-col gap-1.5"
+                      {hasChildren && (
+                        <button
+                          type="button"
+                          onClick={() => setMobileSpecialitiesOpen((v) => !v)}
+                          aria-label="Toggle Specialities Submenu"
+                          className="p-2.5 text-[#004b28] hover:text-[#e181b5] transition-colors"
                         >
-                          <span className="text-sm uppercase tracking-wider font-sans font-semibold text-[#e181b5]">
-                            {col.category}
-                          </span>
-
-                          <div className="flex flex-col gap-1 pl-2">
-                            {col.items.map((item) => (
-                              <Link
-                                key={item.href}
-                                href={item.href}
-                                onClick={() => setOpen(false)}
-                                className="text-lg text-[18px] font-display italic text-[#004b28]/80 hover:text-[#e181b5]"
-                              >
-                                {item.label}
-                              </Link>
-                            ))}
+                          <div
+                            className={`h-8 w-8 rounded-full bg-[#004b28]/10 flex items-center justify-center transition-all duration-300 ${
+                              mobileSpecialitiesOpen
+                                ? "rotate-180 bg-[#004b28] text-white shadow-xs"
+                                : "text-[#004b28]"
+                            }`}
+                          >
+                            <ChevronDown size={18} />
                           </div>
-                        </div>
-                      ))}
+                        </button>
+                      )}
                     </div>
-                  )}
-                </div>
-              ))}
 
-              {/* PHONE NUMBERS */}
+                    {/* MOBILE SPECIALITIES ACCORDION */}
+                    {hasChildren && (
+                      <AnimatePresence>
+                        {mobileSpecialitiesOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                            className="pl-3 pb-4 pt-1 flex flex-col gap-4 overflow-hidden border-t border-[#004b28]/10 mt-1"
+                          >
+                            {link.children.map((col) => (
+                              <div
+                                key={col.category}
+                                className="flex flex-col gap-1.5"
+                              >
+                                <span className="text-xs uppercase tracking-wider font-sans font-bold text-[#e181b5]">
+                                  {col.category}
+                                </span>
 
-              <div className="mt-5 flex flex-col gap-2 text-sm text-[#004b28]/70">
+                                <div className="flex flex-col gap-1 pl-2">
+                                  {col.items.map((item) => (
+                                    <Link
+                                      key={item.href}
+                                      href={item.href}
+                                      onClick={() => {
+                                        setOpen(false);
+                                        setMobileSpecialitiesOpen(false);
+                                      }}
+                                      className="text-base font-display italic text-[#004b28]/85 hover:text-[#e181b5] py-0.5 transition-colors"
+                                    >
+                                      {item.label}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    )}
+                  </div>
+                );
+              })}
+
+              {/* MOBILE BOOK APPOINTMENT CTA BUTTON */}
+              <div className="mt-4 pt-4 border-t border-[#004b28]/10 flex flex-col gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    setAppointmentModalOpen(true);
+                  }}
+                  className="w-full py-3 px-6 rounded-full bg-[#004b28] text-white font-display italic text-lg text-center hover:bg-[#075540] transition-colors shadow-sm"
+                >
+                  Book Appointment Online
+                </button>
+
+                {/* PHONE NUMBERS */}
                 {siteInfo.phones.map((p) => (
                   <a
                     key={p.href}
                     href={p.href}
-                    className="hover:text-[#e181b5]"
+                    className="inline-flex items-center gap-3 text-xl font-display italic text-[#004b28] hover:text-[#e181b5] transition-colors py-1"
                   >
-                    {p.label}
+                    <div className="h-8 w-8 rounded-full bg-[#004b28]/10 text-[#004b28] flex items-center justify-center shrink-0 border border-[#004b28]/15">
+                      <Phone size={16} />
+                    </div>
+                    <span>{p.label}</span>
                   </a>
                 ))}
               </div>
@@ -379,6 +451,14 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+
+      </header>
+
+      {/* APPOINTMENT MODAL POP-UP (RENDERED OUTSIDE HEADER STACKING CONTEXT) */}
+      <AppointmentModal
+        isOpen={appointmentModalOpen}
+        onClose={() => setAppointmentModalOpen(false)}
+      />
+    </>
   );
 }

@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { Phone } from "lucide-react";
+import { siteInfo } from "@/data/site";
 
 const reveal = {
   initial: { opacity: 0, y: 28 },
@@ -79,10 +81,11 @@ export default function Hero() {
         >
 
           <a
-            href="#contact-numbers"
-            className="inline-flex items-center justify-center rounded-full bg-[#e181b5] text-[#fbf2f2] font-display italic text-base md:text-[1.125rem] px-5 md:px-6 py-2.5 border border-[#e181b5] hover:bg-transparent hover:text-[#004b28] transition-all duration-500 shadow-sm"
+            href={siteInfo?.phones?.[0]?.href || "tel:919079765578"}
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#e181b5] text-[#fbf2f2] font-display italic text-base md:text-[1.125rem] px-6 py-3 border border-[#e181b5] hover:bg-[#fbf2f2] hover:border-[#004b28] hover:text-[#004b28] transition-all duration-500 shadow-sm"
           >
-            Call for Appointment
+            <Phone size={18} />
+            <span>Call for Appointment</span>
           </a>
         </motion.div>
       </div>

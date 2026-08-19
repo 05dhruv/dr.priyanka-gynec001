@@ -27,7 +27,7 @@ export default function FloatingButtons() {
         transition={{ delay: 0.75, type: "spring", stiffness: 200, damping: 15 }}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        href="#contact-numbers"
+        href={siteInfo?.phones?.[0]?.href || "tel:919079765578"}
         aria-label="Call for appointment"
         className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-wine text-cream flex items-center justify-center shadow-lg shadow-black/20"
       >

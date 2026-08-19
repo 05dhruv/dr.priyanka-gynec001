@@ -5,14 +5,13 @@ import MomentsSection from "@/components/MomentsSection";
 import Testimonials from "@/components/Testimonials";
 import CTASection from "@/components/CTASection";
 import SpecialityScroll from "@/components/SpecialityScroll";
-
+import HomeBlogs from "@/components/HomeBlogs";
 import { services } from "@/data/site";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-
       {/* Her Story Section */}
       <section className="bg-cream pt-10 pb-0 lg:pt-12 lg:pb-0">
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
@@ -51,6 +50,7 @@ export default function HomePage() {
       <WhyTrust />
       <MomentsSection />
       <Testimonials />
+      <HomeBlogs />
       <CTASection />
     </>
   );
