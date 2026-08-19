@@ -388,7 +388,7 @@ function ServicesCarousel() {
       if (!emblaApi) return;
 
       emblaApi.scrollNext();
-    }, 3500);
+    }, 2500);
   }, [emblaApi]);
 
   /* =======================================================

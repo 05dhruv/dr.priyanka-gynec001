@@ -421,19 +421,21 @@ export default function Navbar() {
               })}
 
               {/* MOBILE BOOK APPOINTMENT CTA BUTTON */}
-              <div className="mt-4 pt-4 border-t border-[#004b28]/10 flex flex-col gap-3">
+              <div className="pt-4 pb-2">
                 <button
                   type="button"
                   onClick={() => {
                     setOpen(false);
                     setAppointmentModalOpen(true);
                   }}
-                  className="w-full py-3 px-6 rounded-full bg-[#004b28] text-white font-display italic text-lg text-center hover:bg-[#075540] transition-colors shadow-sm"
+                  className="w-full py-3 px-6 rounded-full bg-[#004b28] text-white font-display italic text-lg text-center hover:bg-[#075540] transition-colors shadow-sm cursor-pointer"
                 >
                   Book Appointment Online
                 </button>
+              </div>
 
-                {/* PHONE NUMBERS */}
+              {/* BREAKER LINE + PHONE NUMBERS */}
+              <div className="pt-4 border-t border-[#004b28]/10 flex flex-col gap-2.5">
                 {siteInfo.phones.map((p) => (
                   <a
                     key={p.href}

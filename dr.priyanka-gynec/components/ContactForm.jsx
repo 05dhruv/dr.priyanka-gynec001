@@ -22,6 +22,13 @@ export default function ContactForm() {
   }, []);
 
   const handleSubmit = (e) => {
+    const phone = e.target.phone?.value || "";
+    if (!/^[6-9]\d{9}$/.test(phone)) {
+      e.preventDefault();
+      alert("Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9.");
+      return false;
+    }
+
     if (!selectedService) {
       e.preventDefault();
       setServiceError(true);
@@ -86,6 +93,9 @@ export default function ContactForm() {
               name="name"
               placeholder="Your Name *"
               required
+              onInput={(e) => {
+                e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
+              }}
               className="w-full h-12 sm:h-14 rounded-full px-5 border border-gray-200 outline-none focus:border-wine text-sm sm:text-base text-center sm:text-left transition-all"
             />
           </div>
@@ -97,20 +107,22 @@ export default function ContactForm() {
               placeholder="Mobile Number *"
               required
               maxLength={10}
-              pattern="[0-9]{10}"
+              pattern="[6-9][0-9]{9}"
               inputMode="numeric"
               onInput={(e) => {
-                e.target.value = e.target.value
-                  .replace(/\D/g, "")
-                  .slice(0, 10);
+                let val = e.target.value.replace(/\D/g, "");
+                if (val.length > 0 && !/^[6-9]/.test(val)) {
+                  val = val.replace(/^[^6-9]+/, "");
+                }
+                e.target.value = val.slice(0, 10);
               }}
               onInvalid={(e) =>
                 e.target.setCustomValidity(
-                  "Please enter a valid 10-digit mobile number"
+                  "Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9"
                 )
               }
               onChange={(e) => e.target.setCustomValidity("")}
-              className="w-full h-12 sm:h-14 rounded-full px-5 border border-gray-200 outline-none focus:border-wine text-sm sm:text-base text-center sm:text-left transition-all"
+              className="w-full h-12 sm:h-14 rounded-full px-5 border border-gray-200 outline-none focus:border-wine text-sm sm:text-base text-center sm:text-left transition-all font-mono"
             />
           </div>
         </div>

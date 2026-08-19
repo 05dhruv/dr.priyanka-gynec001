@@ -6,13 +6,13 @@ export const siteInfo = {
 
   phones: [
     {
-      label: "+91 90 7976 5578",
+      label: "+91 90797 65578",
       href: "tel:919079765578",
     },
   ],
 
   whatsapp: {
-    label: "+91 96 8032 1761",
+    label: "+91 96803 21761",
     href: "https://wa.me/919680321761",
   },
 
@@ -162,11 +162,11 @@ export const services = [
     overview:
       "Advanced Gynaecological Laparoscopy—often termed keyhole or minimally invasive surgery—uses specialized high-definition 3D camera systems inserted through tiny incisions (5-10mm). Led by Dr. Priyanka Pachauri (FMAS), our center offers world-class diagnostic and operative laparoscopy that avoids large abdominal incisions. This approach dramatically minimizes post-operative discomfort, reduces hospital stay to day-care or 24-48 hours, and preserves natural pelvic anatomy and fertility potential.",
     keyBenefits: [
-      "Micro-incisions (5-10mm) resulting in minimal or virtually invisible scarring",
-      "Significantly reduced post-operative pain & minimal reliance on heavy painkillers",
-      "Faster recovery—most patients return to normal routine within 5 to 7 days",
-      "Superior 3D visual clarity ensuring maximal precision around delicate nerve structures",
-      "Significantly lower risk of post-surgical adhesions or infection",
+      "Micro-Incisional Precision: 5-10mm keyhole incisions resulting in minimal or virtually invisible scarring.",
+      "Reduced Post-Op Discomfort: Minimal pain and reliance on heavy painkillers after surgery.",
+      "Faster Recovery: Most patients return to normal routine within 5 to 7 days.",
+      "Superior 3D Clarity: High-definition 3D optics ensuring maximal precision around delicate nerve structures.",
+      "Adhesion Prevention: Significantly lower risk of post-surgical adhesions or infection.",
     ],
     points: [
       "High-Definition 3D Laparoscopic evaluation & surgery",
@@ -237,11 +237,11 @@ export const services = [
     overview:
       "Struggling to conceive can feel overwhelming, but you are not alone. At Dr. Priyanka Gynec, fertility care begins with listening, thorough diagnostic clarity, and individual tailor-made protocols. Supported by state-of-the-art GERI time-lapse embryo incubators, advanced IVF laboratories, and AI-assisted semen analysis, Dr. Priyanka Pachauri provides comprehensive reproductive care ranging from ovulation induction to advanced ICSI and donor programs with warmth and transparency.",
     keyBenefits: [
-      "Personalized stimulation protocols tailored to ovarian reserve (AMH) & age",
-      "GERI time-lapse incubation for undisturbed 24/7 embryo development monitoring",
-      "AI-driven sperm analysis and DNA fragmentation evaluation for maximum accuracy",
-      "Comprehensive evaluation of both female and male reproductive health",
-      "Compassionate emotional counselling alongside clinical treatment",
+      "Personalized Protocols: Tailored stimulation plans based on ovarian reserve (AMH) and maternal age.",
+      "GERI Time-Lapse Incubators: Undisturbed 24/7 embryo development monitoring for optimal embryo selection.",
+      "AI-Assisted Diagnostics: AI-driven sperm analysis and DNA fragmentation evaluation for maximum accuracy.",
+      "Complete Couple Care: Comprehensive evaluation of both female and male reproductive health.",
+      "Compassionate Counseling: Emotional support provided alongside clinical treatment.",
     ],
     points: [
       "Comprehensive fertility evaluation & hormonal diagnostics",
@@ -312,11 +312,11 @@ export const services = [
     overview:
       "Embracing motherhood is a transformative journey that deserves dedicated medical expertise and gentle, empathetic care. Dr. Priyanka Pachauri offers comprehensive pregnancy care from early conception scans through delivery and postpartum recovery. Utilizing advanced 3D/4D ultrasound technology (Voluson E22) and evidence-based obstetric protocols, we safeguard mother and child through routine as well as complex high-risk pregnancies.",
     keyBenefits: [
-      "Complete antenatal checkups with Voluson E22 3D/4D ultrasound tracking",
-      "High-risk pregnancy specialization (hypertension, diabetes, thyroid disorders, twins)",
-      "Personalized birth plans respecting maternal choices and natural birth preferences",
-      "Continuous fetal heart monitoring (CTG) and emergency obstetric readiness 24/7",
-      "Comprehensive postnatal, lactation support, and newborn wellness care",
+      "3D/4D Fetal Tracking: Complete antenatal checkups with Voluson E22 3D/4D ultrasound monitoring.",
+      "High-Risk Obstetric Care: Specialized management for hypertension, diabetes, thyroid disorders, and twins.",
+      "Personalized Birth Plans: Custom birthing options respecting maternal choices and natural birth preferences.",
+      "24/7 Fetal Safety: Continuous fetal heart monitoring (CTG) and emergency obstetric readiness.",
+      "Postnatal & Lactation Support: Comprehensive postnatal wellness care, lactation guidance, and baby care.",
     ],
     points: [
       "Antenatal care, growth scans & 3D/4D fetal wellbeing monitoring",
@@ -387,11 +387,11 @@ export const services = [
     overview:
       "Antenatal care forms the bedrock of a healthy pregnancy and a happy birth outcome. Our antenatal package combines detailed clinical examinations, biochemical screening, blood investigations, nutritional guidance, and high-resolution ultrasound scans. Dr. Priyanka ensures every trimester is met with clarity, reassurance, and proactive care for mother and baby.",
     keyBenefits: [
-      "Trimester-specific health check-ups and personalized dietary charts",
-      "Early identification of gestational diabetes, pre-eclampsia, and anemia",
-      "Advanced 3D/4D ultrasound imaging for anatomical screening",
-      "Parental education classes on labor stages, breathing, and newborn preparation",
-      "Direct access to emergency obstetric advice whenever needed",
+      "Trimester-Wise Care: Structured health check-ups and personalized dietary charts for every milestone.",
+      "Early Risk Screening: Timely identification of gestational diabetes, pre-eclampsia, and anemia.",
+      "Advanced 3D/4D Scans: High-resolution anatomical ultrasound imaging throughout pregnancy.",
+      "Childbirth Education: Parental guidance classes on labor stages, breathing, and newborn preparation.",
+      "Emergency Support: Direct access to emergency obstetric advice whenever needed.",
     ],
     points: [
       "Regular trimester check-ups & maternal vitals monitoring",
@@ -459,11 +459,11 @@ export const services = [
     overview:
       "At Dr. Priyanka Gynec, we strongly advocate for natural birthing whenever safe and clinically feasible. Our delivery suite is designed to offer a peaceful, soothing environment equipped with continuous fetal heart monitoring, painless epidural labor analgesia, and skilled labor management to help mothers experience a joyful normal childbirth.",
     keyBenefits: [
-      "Empathetic labor support with one-on-one nursing and medical supervision",
-      "Painless labor options including walking epidural analgesia",
-      "Active labor encouragement with freedom of position and movement",
-      "Immediate skin-to-skin contact and early golden-hour breastfeeding support",
-      "Full surgical standby for immediate emergency intervention if clinically indicated",
+      "Empathetic Labor Care: One-on-one nursing and expert medical supervision during active labor.",
+      "Painless Labor Options: Advanced pain relief including walking epidural assistance.",
+      "Active Birthing Freedom: Support for movement and natural positioning during labor.",
+      "Golden Hour Bonding: Immediate skin-to-skin contact and early breastfeeding support.",
+      "24/7 Surgical Readiness: Full operating theater standby for immediate emergency intervention if needed.",
     ],
     points: [
       "Natural birthing preparation & pelvimetry evaluation",
@@ -531,11 +531,11 @@ export const services = [
     overview:
       "Ovarian cysts are fluid-filled sacs that develop on or inside the ovaries. While many resolve on their own, persistent, large, or painful cysts (such as dermoid cysts, chocolate cysts/endometriomas, or cystadenomas) require surgical excision. Dr. Priyanka specializes in 3D Laparoscopic Cystectomy—carefully stripping the cyst wall while preserving maximum healthy ovarian cortex to safeguard your egg reserve.",
     keyBenefits: [
-      "Fertility preservation by meticulous dissection around normal ovarian tissue",
-      "Microkeyhole incisions (under 1 cm) with minimal cosmetic mark",
-      "Same-day or 24-hour discharge with minimal post-op pain",
-      "Prevention of cyst rupture or ovarian torsion complications",
-      "Comprehensive histopathological examination of excised tissue",
+      "Fertility Preservation: Meticulous micro-dissection around normal ovarian tissue to protect egg reserve.",
+      "Minimal Cosmetic Impact: Micro-keyhole incisions under 1 cm with fading marks.",
+      "Quick Discharge: Same-day or 24-hour hospital stay with minimal post-op pain.",
+      "Complication Prevention: Eliminates risks of cyst rupture, chronic pain, or ovarian torsion.",
+      "Pathology Verification: Comprehensive histopathological examination of all excised tissue.",
     ],
     points: [
       "3D Laparoscopic excision of ovarian cysts & endometriomas",
@@ -603,11 +603,11 @@ export const services = [
     overview:
       "Uterine fibroids (myomas) are non-cancerous growths in the uterine wall that can cause heavy menstrual bleeding, severe cramps, pelvic pressure, or infertility. For women who wish to keep their uterus or plan future pregnancies, Laparoscopic Myomectomy is the procedure of choice. Dr. Priyanka Pachauri performs precision keyhole fibroid excision followed by multi-layer uterine suturing to restore normal uterine architecture.",
     keyBenefits: [
-      "Complete preservation of the uterus and future fertility capability",
-      "Relief from heavy bleeding, painful periods, and pelvic pressure",
-      "Minimal blood loss utilizing advanced vessel sealing instruments",
-      "Multi-layered anatomical uterine reconstruction for safe future pregnancy",
-      "Short hospital stay (24-48 hours) and fast return to work",
+      "Uterus Preservation: Complete retention of the uterus for future pregnancy and reproductive health.",
+      "Symptom Relief: Relief from heavy menstrual bleeding, painful periods, and pelvic pressure.",
+      "Minimal Blood Loss: Precise fibroid removal utilizing advanced vessel-sealing instruments.",
+      "Multi-Layer Suturing: Anatomical uterine wall reconstruction for safe future pregnancy.",
+      "Quick Recovery: Short hospital stay (24-48 hours) and fast return to normal daily work.",
     ],
     points: [
       "Laparoscopic removal of intramural, subserosal & submucosal fibroids",
@@ -675,11 +675,11 @@ export const services = [
     overview:
       "When medical management fails for definitive conditions like multiple large fibroids, severe adenomyosis, refractory heavy bleeding, or uterine prolapse, Hysterectomy (removal of the uterus) may be recommended. Total Laparoscopic Hysterectomy (TLH) replaces traditional open abdominal surgery with 3-4 keyhole punctures. Performed by Dr. Priyanka, TLH ensures precise vascular vessel sealing, minimal blood loss, and a smooth recovery.",
     keyBenefits: [
-      "No large abdominal incision—leaves only tiny, fading keyhole marks",
-      "Drastically reduced post-op pain compared to traditional open surgery",
-      "Hospital stay of only 24 to 48 hours",
-      "Preservation of ovarian tissue whenever medically appropriate to prevent surgical menopause",
-      "Quick resumption of daily routine within 1 to 2 weeks",
+      "No Open Incisions: Leaves only tiny, fading keyhole marks with no large abdominal cuts.",
+      "Reduced Post-Op Pain: Drastically lower discomfort compared to traditional open surgery.",
+      "Short Hospital Stay: Hospital discharge within 24 to 48 hours.",
+      "Hormonal Balance Preservation: Ovarian tissue retained whenever appropriate to prevent surgical menopause.",
+      "Fast Routine Resumption: Quick return to daily activities within 1 to 2 weeks.",
     ],
     points: [
       "Total Laparoscopic Hysterectomy (TLH)",
@@ -746,10 +746,10 @@ export const services = [
     overview:
       "Pelvic Organ Prolapse occurs when pelvic floor muscles and ligaments stretch or weaken, causing the uterus, bladder, or vaginal vault to slip down. Laparoscopic Sacrocolpopexy is considered the clinical gold standard for prolapse repair. Using a lightweight biocompatible mesh anchored to the sacral promontory via keyhole surgery, Dr. Priyanka restores anatomically durable support without large open incisions.",
     keyBenefits: [
-      "Highest long-term success rate and lowest recurrence rate for vault prolapse repair",
-      "Restores normal pelvic anatomy and sexual function",
-      "Minimally invasive keyhole approach with faster healing",
-      "Relief from vaginal bulge, heaviness, and urinary incontinence issues",
+      "Durable Long-Term Repair: Highest long-term success rate and lowest recurrence for prolapse.",
+      "Anatomical Restoration: Restores normal pelvic support, vaginal depth, and intimate function.",
+      "Minimally Invasive: Keyhole mesh anchoring approach with faster healing than open surgery.",
+      "Pelvic Relief: Relief from vaginal bulges, pelvic heaviness, and urinary incontinence.",
     ],
     points: [
       "Laparoscopic mesh sacrocolpopexy & sacrohysteropexy",
@@ -815,10 +815,10 @@ export const services = [
     overview:
       "Laparoscopic Sterilization (Female Tubal Ligation) is a safe, permanent family planning procedure. Through a tiny 5mm umbilical puncture, the fallopian tubes are occluded or clipped under direct camera vision. The procedure takes under 20 minutes, allows same-day discharge, and offers immediate, reliable contraception without affecting hormonal balance.",
     keyBenefits: [
-      "Over 99.5% effective permanent contraception",
-      "Quick 15-20 minute day-care procedure under light anesthesia",
-      "Zero effect on natural menstrual cycles or hormone levels",
-      "Virtually invisible single-puncture mark",
+      "Permanent Protection: Over 99.5% effective permanent family planning.",
+      "Day-Care Convenience: Quick 15-20 minute procedure under light anesthesia with same-day discharge.",
+      "Hormone-Free Safety: Zero effect on natural menstrual cycles or hormone levels.",
+      "Single Keyhole Mark: Performed through a virtually invisible tiny umbilical puncture.",
     ],
     points: [
       "Laparoscopic tubal ligation & clip application",
@@ -881,10 +881,10 @@ export const services = [
     overview:
       "Diagnostic Hysteroscopy involves introducing a ultra-thin lighted telescope (hysteroscope) through the natural opening of the cervix into the uterus. Because there are no surgical incisions, this procedure allows Dr. Priyanka to inspect the endometrial lining, tubal ostia, and cavity structure directly with zero abdominal cuts.",
     keyBenefits: [
-      "No abdominal cuts—performed entirely through natural passage",
-      "Immediate clear diagnostic visualization of polyps, fibroids, or uterine septums",
-      "Painless or minimal discomfort day-care procedure",
-      "Simultaneous biopsy or minor corrective treatment if needed",
+      "Incisionless Access: Performed entirely through natural cervical passages with zero abdominal cuts.",
+      "Direct Visual Clarity: Instant high-definition diagnosis of polyps, fibroids, or uterine septums.",
+      "Painless Day-Care Care: Minimal discomfort with quick return home in a few hours.",
+      "Single-Session Biopsy: Simultaneous targeted biopsy or minor treatment if needed.",
     ],
     points: [
       "Direct visualization of uterine lining & cavity structure",
@@ -949,10 +949,10 @@ export const services = [
     overview:
       "Endometrial polyps are benign overgrowths attached to the inner wall of the uterus. They often cause heavy periods, intermenstrual spotting, or interfere with embryo implantation. Hysteroscopic Polypectomy precisely snips and extracts polyps under direct camera visualization, leaving the surrounding healthy lining intact.",
     keyBenefits: [
-      "Incisionless technique through natural cervical access",
-      "Instant relief from abnormal bleeding and heavy periods",
-      "Enhances endometrial receptivity for pregnancy and IVF success",
-      "Quick day-care procedure with fast recovery within 24 hours",
+      "No Surgical Cuts: Incisionless technique through natural cervical access.",
+      "Bleeding Relief: Instant relief from abnormal bleeding and heavy periods.",
+      "Fertility Enhancement: Improves uterine lining health and embryo implantation rates.",
+      "Fast 24-Hour Recovery: Quick day-care procedure with rapid return to normal work.",
     ],
     points: [
       "Precision hysteroscopic resection of endometrial polyps",
@@ -1016,10 +1016,10 @@ export const services = [
     overview:
       "Endometriosis occurs when tissue similar to the lining of the uterus grows outside the uterus—on ovaries, fallopian tubes, bowel, or pelvic lining—causing severe inflammation, chronic pelvic pain, and scar tissue (adhesions). Dr. Priyanka Pachauri specializes in advanced 3D Laparoscopic Excision Surgery, meticulously removing endometriotic lesions while liberating trapped organs and protecting fertility.",
     keyBenefits: [
-      "Excision approach (removing root tissue) rather than simple superficial burning",
-      "Significant relief from severe pelvic pain, painful periods & painful intercourse",
-      "Restoration of pelvic organ mobility and tubal-ovarian relationships",
-      "Comprehensive medical & hormonal post-operative management plan",
+      "Complete Tissue Excision: Removing root lesions rather than superficial burning.",
+      "Pelvic Pain Relief: Significant relief from severe pelvic pain, dysmenorrhea, and painful intercourse.",
+      "Anatomical Liberation: Restores pelvic organ mobility and tubal-ovarian relationships.",
+      "Structured Aftercare: Comprehensive medical and hormonal post-operative care plan.",
     ],
     points: [
       "3D Laparoscopic excision of deep infiltrating endometriosis (DIE)",
@@ -1086,10 +1086,10 @@ export const services = [
     overview:
       "Your child's health and development require gentle, expert care at every step. From newborn assessments and immunizations to managing common childhood illnesses, growth tracking, and adolescent health, Dr. Priyanka Gynec offers a supportive environment where parents feel confident and children feel safe.",
     keyBenefits: [
-      "Comprehensive newborn wellness assessment & jaundice screening",
-      "Strict cold-chain maintained pediatric vaccination facility",
-      "Growth, milestone, and nutritional development tracking",
-      "Warm, child-friendly clinic setting designed to reduce anxiety",
+      "Newborn Screening: Comprehensive infant wellness assessment and jaundice screening.",
+      "Cold-Chain Immunization: Strict WHO-compliant cold-chain storage for safe vaccinations.",
+      "Development Tracking: Growth, milestone, and nutritional progress monitoring.",
+      "Child-Friendly Environment: Warm, reassuring clinic setting designed to keep children comfortable.",
     ],
     points: [
       "Newborn care & infant developmental tracking",
@@ -1200,7 +1200,7 @@ export const doctors = [
     role: "Consultant Obstetrician, Gynaecologist & Infertility Specialist",
 
     bio:
-      "A highly distinguished and experienced specialist with over 14 years of clinical expertise, Dr. Priyanka Pachauri co-leads Shree Advanced Urogynae Clinic and serves as a Consultant at Ujala Cygnus BrightStar Hospital. She is deeply committed to combining advanced, minimally invasive surgical precision with compassionate maternal care. Known for her technical skill in handling complex clinical challenges, she provides a supportive environment that inspires confidence in patients navigating high-risk pregnancies and reproductive health journeys.",
+      "A highly distinguished and experienced specialist, Dr. Priyanka Pachauri co-leads Shree Advanced Urogynae Clinic and serves as a Consultant at Ujala Cygnus BrightStar Hospital. She is deeply committed to combining advanced, minimally invasive surgical precision with compassionate maternal care. Known for her technical skill in handling complex clinical challenges, she provides a supportive environment that inspires confidence in patients navigating high-risk pregnancies and reproductive health journeys.",
 
     education: [
       "MBBS, Gajra Raja Medical College (GRMC), Gwalior (2012)",

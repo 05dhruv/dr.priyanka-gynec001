@@ -10,9 +10,9 @@ export default function AppointmentModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    service: "",
-    date: "",
-    timeSlot: "Morning (10:00 AM - 1:00 PM)",
+    speciality: "",
+    preferred_date: "",
+    time_slot: "Morning (10:00 AM - 1:00 PM)",
     notes: "",
   });
 
@@ -20,13 +20,24 @@ export default function AppointmentModal({ isOpen, onClose }) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Lock body scroll when modal is open
+  // Lock body scroll and reset form state whenever modal is opened or closed
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
       setErrorMsg("");
     } else {
       document.body.style.overflow = "";
+      // Reset form data completely every time modal closes
+      setFormData({
+        name: "",
+        phone: "",
+        speciality: "",
+        preferred_date: "",
+        time_slot: "Morning (10:00 AM - 1:00 PM)",
+        notes: "",
+      });
+      setSubmitted(false);
+      setErrorMsg("");
     }
     return () => {
       document.body.style.overflow = "";
@@ -40,14 +51,21 @@ export default function AppointmentModal({ isOpen, onClose }) {
     if (errorMsg) setErrorMsg("");
   };
 
-  // Phone: Numbers only, max 10 digits
+  // Phone: Numbers only, max 10 digits with instant invalid prefix notification
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/\D/g, "").slice(0, 10);
     setFormData((prev) => ({ ...prev, phone: value }));
-    if (errorMsg) setErrorMsg("");
+
+    if (value.length > 0 && !/^[6-9]/.test(value)) {
+      setErrorMsg("Invalid mobile number.");
+    } else {
+      if (errorMsg === "Invalid mobile number.") {
+        setErrorMsg("");
+      }
+    }
   };
 
-  // Generic change handler for other fields
+  // Generic change handler for all controlled fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -62,19 +80,28 @@ export default function AppointmentModal({ isOpen, onClose }) {
       return;
     }
 
-    if (formData.phone.length !== 10) {
+    if (!/^[6-9]\d{9}$/.test(formData.phone)) {
       e.preventDefault();
-      setErrorMsg("Please enter a valid 10-digit phone number.");
+      setErrorMsg("Invalid mobile number.");
+      // Refresh form data back to blank on invalid submit
+      setFormData({
+        name: "",
+        phone: "",
+        speciality: "",
+        preferred_date: "",
+        time_slot: "Morning (10:00 AM - 1:00 PM)",
+        notes: "",
+      });
       return;
     }
 
-    if (!formData.service) {
+    if (!formData.speciality) {
       e.preventDefault();
       setErrorMsg("Please select a speciality.");
       return;
     }
 
-    if (!formData.date) {
+    if (!formData.preferred_date) {
       e.preventDefault();
       setErrorMsg("Please select a preferred appointment date.");
       return;
@@ -90,9 +117,9 @@ export default function AppointmentModal({ isOpen, onClose }) {
     setFormData({
       name: "",
       phone: "",
-      service: "",
-      date: "",
-      timeSlot: "Morning (10:00 AM - 1:00 PM)",
+      speciality: "",
+      preferred_date: "",
+      time_slot: "Morning (10:00 AM - 1:00 PM)",
       notes: "",
     });
     onClose();
@@ -107,7 +134,7 @@ export default function AppointmentModal({ isOpen, onClose }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
+            onClick={handleReset}
             className="fixed inset-0 bg-black/70 backdrop-blur-md"
           />
 
@@ -146,7 +173,7 @@ export default function AppointmentModal({ isOpen, onClose }) {
               {/* Close Button */}
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleReset}
                 aria-label="Close modal"
                 className="h-8 w-8 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors shrink-0"
               >
@@ -173,7 +200,7 @@ export default function AppointmentModal({ isOpen, onClose }) {
 
                   <div className="bg-[#fbf5ee] p-3.5 rounded-xl border border-[#004b28]/10 text-left text-xs text-[#004b28]/80 space-y-1">
                     <p><span className="font-bold">Clinic Location:</span> Gandhi Nagar, Moradabad</p>
-                    <p><span className="font-bold">Direct Call:</span> +91 90 7976 5578</p>
+                    <p><span className="font-bold">Direct Call:</span> +91 90797 65578</p>
                   </div>
 
                   <button
@@ -222,7 +249,7 @@ export default function AppointmentModal({ isOpen, onClose }) {
                           required
                           value={formData.name}
                           onChange={handleNameChange}
-                          placeholder="Alphabets Only"
+                          placeholder="Enter Your Name"
                           className="w-full px-3.5 py-2.5 rounded-xl border border-[#004b28]/20 bg-[#fbf5ee]/40 text-sm text-[#1b2a26] focus:bg-white focus:border-[#004b28] focus:outline-none transition-all pl-9"
                         />
                         <User size={15} className="absolute left-3 top-3 text-[#004b28]/50" />
@@ -239,9 +266,10 @@ export default function AppointmentModal({ isOpen, onClose }) {
                           name="phone"
                           required
                           maxLength={10}
+                          pattern="[6-9][0-9]{9}"
                           value={formData.phone}
                           onChange={handlePhoneChange}
-                          placeholder="10 Digit Mobile No"
+                          placeholder="Enter Your Number"
                           className="w-full px-3.5 py-2.5 rounded-xl border border-[#004b28]/20 bg-[#fbf5ee]/40 text-sm text-[#1b2a26] focus:bg-white focus:border-[#004b28] focus:outline-none transition-all pl-9 font-mono"
                         />
                         <Phone size={15} className="absolute left-3 top-3 text-[#004b28]/50" />
@@ -257,7 +285,7 @@ export default function AppointmentModal({ isOpen, onClose }) {
                     <select
                       name="speciality"
                       required
-                      value={formData.service}
+                      value={formData.speciality}
                       onChange={handleChange}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-[#004b28]/20 bg-[#fbf5ee]/40 text-sm text-[#1b2a26] focus:bg-white focus:border-[#004b28] focus:outline-none transition-all"
                     >
@@ -284,11 +312,11 @@ export default function AppointmentModal({ isOpen, onClose }) {
                           type="date"
                           name="preferred_date"
                           required
-                          value={formData.date}
+                          value={formData.preferred_date}
                           onChange={handleChange}
                           className="w-full px-3.5 py-2.5 rounded-xl border border-[#004b28]/20 bg-[#fbf5ee]/40 text-sm text-[#1b2a26] focus:bg-white focus:border-[#004b28] focus:outline-none transition-all pl-9"
                         />
-                        <Calendar size={15} className="absolute left-3 top-3 text-[#004b28]/50" />
+                        <Calendar size={15} className="absolute left-3 top-3 text-[#004b28]/50 pointer-events-none" />
                       </div>
                     </div>
 
@@ -299,7 +327,7 @@ export default function AppointmentModal({ isOpen, onClose }) {
                       <div className="relative">
                         <select
                           name="time_slot"
-                          value={formData.timeSlot}
+                          value={formData.time_slot}
                           onChange={handleChange}
                           className="w-full px-3.5 py-2.5 rounded-xl border border-[#004b28]/20 bg-[#fbf5ee]/40 text-sm text-[#1b2a26] focus:bg-white focus:border-[#004b28] focus:outline-none transition-all pl-9"
                         >
@@ -307,7 +335,7 @@ export default function AppointmentModal({ isOpen, onClose }) {
                           <option value="Afternoon (2:00 PM - 5:00 PM)">Afternoon (2 PM - 5 PM)</option>
                           <option value="Evening (5:00 PM - 8:00 PM)">Evening (5 PM - 8 PM)</option>
                         </select>
-                        <Clock size={15} className="absolute left-3 top-3 text-[#004b28]/50" />
+                        <Clock size={15} className="absolute left-3 top-3 text-[#004b28]/50 pointer-events-none" />
                       </div>
                     </div>
                   </div>
@@ -346,7 +374,7 @@ export default function AppointmentModal({ isOpen, onClose }) {
                       className="inline-flex items-center gap-2 text-xs font-bold text-[#e181b5] hover:underline"
                     >
                       <Phone size={13} />
-                      Direct Call Helpline: +91 90 7976 5578
+                      Direct Call Helpline: +91 90797 65578
                     </a>
                   </div>
                 </form>

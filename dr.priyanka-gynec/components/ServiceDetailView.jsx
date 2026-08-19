@@ -20,18 +20,15 @@ import { siteInfo, doctors } from "@/data/site";
 import ExploreMoreSpecialities from "@/components/ExploreMoreSpecialities";
 import Testimonials from "@/components/Testimonials";
 import CTASection from "@/components/CTASection";
+import AppointmentModal from "@/components/AppointmentModal";
 
 export default function ServiceDetailView({ service }) {
-  const [firstFaqOpen, setFirstFaqOpen] = useState(false);
-  const [openChildFaqs, setOpenChildFaqs] = useState({});
+  const [openFaqs, setOpenFaqs] = useState({});
+  const [appointmentModalOpen, setAppointmentModalOpen] = useState(false);
   const drPriyanka = doctors[0] || {};
 
-  const toggleFirstFaq = () => {
-    setFirstFaqOpen((prev) => !prev);
-  };
-
-  const toggleChildFaq = (index) => {
-    setOpenChildFaqs((prev) => ({
+  const toggleFaq = (index) => {
+    setOpenFaqs((prev) => ({
       ...prev,
       [index]: !prev[index],
     }));
@@ -56,9 +53,66 @@ export default function ServiceDetailView({ service }) {
     },
   ];
 
+  const parseBenefit = (benefitItem, idx) => {
+    let title = "";
+    let desc = "";
+
+    if (typeof benefitItem === "object" && benefitItem !== null) {
+      title = benefitItem.title || benefitItem.label || `Benefit ${idx + 1}`;
+      desc = benefitItem.desc || benefitItem.description || "";
+    } else if (typeof benefitItem === "string") {
+      const itemStr = benefitItem.trim();
+
+      if (itemStr.includes(":")) {
+        const parts = itemStr.split(":");
+        title = parts[0].trim();
+        desc = parts.slice(1).join(":").trim();
+      } else if (itemStr.includes("—")) {
+        const parts = itemStr.split("—");
+        title = parts[0].trim();
+        desc = parts.slice(1).join("—").trim();
+      } else if (itemStr.includes(" – ")) {
+        const parts = itemStr.split(" – ");
+        title = parts[0].trim();
+        desc = parts.slice(1).join(" – ").trim();
+      } else if (itemStr.includes(" - ")) {
+        const parts = itemStr.split(" - ");
+        title = parts[0].trim();
+        desc = parts.slice(1).join(" - ").trim();
+      } else {
+        // Natural phrase break matching
+        const regexBreak = /\s+(resulting in|ensuring|providing|allowing|featuring|with|for|to)\s+/i;
+        const match = itemStr.match(regexBreak);
+
+        if (match && match.index > 5) {
+          title = itemStr.substring(0, match.index).trim();
+          desc = itemStr.substring(match.index + 1).trim();
+          desc = desc.charAt(0).toUpperCase() + desc.slice(1);
+        } else {
+          const words = itemStr.split(/\s+/);
+          if (words.length > 4) {
+            title = words.slice(0, 4).join(" ");
+            desc = words.slice(4).join(" ");
+            desc = desc.charAt(0).toUpperCase() + desc.slice(1);
+          } else {
+            title = itemStr;
+            desc = "";
+          }
+        }
+      }
+    }
+
+    // Ensure title and desc are never identical
+    if (desc && title.toLowerCase() === desc.toLowerCase()) {
+      desc = "";
+    }
+
+    return { title, desc };
+  };
+
   const benefitsToRender = service.keyBenefits && service.keyBenefits.length > 0
     ? service.keyBenefits
-    : defaultBenefits.map((b) => `${b.title}: ${b.desc}`);
+    : defaultBenefits;
 
   return (
     <main className="min-h-screen bg-[#fbf5ee] text-[#1b2a26]">
@@ -100,9 +154,9 @@ export default function ServiceDetailView({ service }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-6 text-base sm:text-lg md:text-xl leading-relaxed text-[#1b2a26]/80 font-light max-w-3xl mx-auto"
+              className="mt-6 text-lg sm:text-xl md:text-2xl text-[#1b2a26]/80 font-light max-w-3xl mx-auto leading-relaxed"
             >
-              {service.blurb || service.homeBlurb}
+              {service.blurb}
             </motion.p>
 
             {/* Quick Feature Badges */}
@@ -116,10 +170,6 @@ export default function ServiceDetailView({ service }) {
                 <ShieldCheck size={16} className="text-[#004b28]" />
                 <span>3D Laparoscopic &amp; Advanced Care</span>
               </div>
-              <div className="flex items-center gap-2 rounded-full bg-[#e181b5]/10 border border-[#e181b5]/20 px-3.5 py-1.5 text-xs sm:text-sm font-medium text-[#a32259]">
-                <Award size={16} className="text-[#a32259]" />
-                <span>14+ Years Clinical Distinction</span>
-              </div>
               <div className="flex items-center gap-2 rounded-full bg-[#004b28]/5 border border-[#004b28]/10 px-3.5 py-1.5 text-xs sm:text-sm font-medium text-[#004b28]">
                 <Clock size={16} className="text-[#004b28]" />
                 <span>Day Care / Fast Recovery</span>
@@ -130,15 +180,15 @@ export default function ServiceDetailView({ service }) {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               className="mt-10 flex flex-wrap items-center justify-center gap-4"
             >
               <a
-                href="tel:919079765578"
+                href={siteInfo?.phones?.[0]?.href || "tel:919079765578"}
                 className="inline-flex items-center gap-2.5 rounded-full bg-[#004b28] px-7 py-3.5 text-white font-medium text-base hover:bg-[#075540] transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
               >
                 <Phone size={18} />
-                <span>Call +91 90 7976 5578</span>
+                <span>Call +91 90797 65578</span>
               </a>
 
               <a
@@ -148,7 +198,7 @@ export default function ServiceDetailView({ service }) {
                 className="inline-flex items-center gap-2.5 rounded-full bg-white border border-[#004b28]/20 px-7 py-3.5 text-[#004b28] font-medium text-base hover:bg-[#004b28]/5 transition-all shadow-xs hover:-translate-y-0.5"
               >
                 <MessageCircle size={18} className="text-[#25D366]" />
-                <span>WhatsApp Inquiry</span>
+                <span>WhatsApp Consult</span>
               </a>
             </motion.div>
           </div>
@@ -156,47 +206,45 @@ export default function ServiceDetailView({ service }) {
       </section>
 
       {/* =========================================================
-          OVERVIEW & CLINICAL EXPERTISE
+          OVERVIEW & DOCTOR HIGHLIGHT
       ========================================================= */}
-      <section className="py-16 md:py-24 bg-white border-y border-[#004b28]/10">
+      <section className="py-16 md:py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
-            {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#e181b5]">
-                <Stethoscope size={16} />
-                <span>Clinical Overview</span>
-              </div>
-
-              <h2 className="font-display italic text-3xl sm:text-4xl lg:text-5xl text-[#004b28] leading-tight">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e181b5]">
+                Medical Overview
+              </span>
+              <h2 className="font-display italic text-3xl sm:text-4xl md:text-5xl text-[#004b28] leading-tight">
                 Understanding <span className="not-italic font-serif">{service.title}</span>
               </h2>
-
-              <p className="text-[#1b2a26]/85 text-base sm:text-lg leading-relaxed font-light">
-                {service.overview || service.blurb}
+              <p className="text-base sm:text-lg text-[#1b2a26]/80 leading-relaxed font-light">
+                {service.overview}
               </p>
 
-              {/* Quote callout */}
-              <div className="rounded-2xl bg-[#fbf5ee] border-l-4 border-[#004b28] p-6 text-[#004b28] shadow-xs">
-                <p className="font-display italic text-lg sm:text-xl leading-snug">
-                  &ldquo;Every woman deserves healthcare that listens first, respects her body, and delivers world-class medical expertise with warmth.&rdquo;
-                </p>
-                <p className="mt-3 text-xs uppercase tracking-wider font-semibold text-[#004b28]/70">
-                  — Dr. Priyanka Pachauri (Consultant Gynaecologist &amp; IVF Specialist)
-                </p>
-              </div>
+              {/* Highlights List */}
+              {Array.isArray(service.points) && service.points.length > 0 && (
+                <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  {service.points.map((pt, pIdx) => (
+                    <div key={pIdx} className="flex items-start gap-3 bg-[#fbf5ee] p-3.5 rounded-2xl border border-[#004b28]/5">
+                      <CheckCircle2 size={18} className="text-[#e181b5] shrink-0 mt-0.5" />
+                      <span className="text-xs sm:text-sm text-[#004b28] font-medium">{pt}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Right Image Frame */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md lg:max-w-none aspect-[4/5] rounded-[36px] overflow-hidden shadow-2xl border-4 border-[#fbf5ee]">
+            {/* Doctor Card */}
+            <div className="lg:col-span-5">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#004b28]/10 group">
                 <Image
-                  src="https://res.cloudinary.com/dv9tivfvq/image/upload/v1786608482/IMG_1_wx7atm.jpg"
-                  alt={service.title}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                  src={drPriyanka.image || "https://res.cloudinary.com/dv9tivfvq/image/upload/v1786608482/IMG_1_wx7atm.jpg"}
+                  alt={drPriyanka.name || "Dr. Priyanka"}
+                  width={600}
+                  height={750}
+                  className="w-full h-[460px] object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 
@@ -231,9 +279,7 @@ export default function ServiceDetailView({ service }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {benefitsToRender.map((benefitItem, idx) => {
-              const parts = typeof benefitItem === "string" ? benefitItem.split(":") : [];
-              const title = parts[0] || `Benefit ${idx + 1}`;
-              const desc = parts.slice(1).join(":") || benefitItem;
+              const { title, desc } = parseBenefit(benefitItem, idx);
 
               return (
                 <motion.div
@@ -252,9 +298,11 @@ export default function ServiceDetailView({ service }) {
                       {title}
                     </h3>
                   </div>
-                  <p className="text-sm text-[#1b2a26]/75 leading-relaxed font-light">
-                    {desc}
-                  </p>
+                  {desc && (
+                    <p className="text-sm text-[#1b2a26]/75 leading-relaxed font-light">
+                      {desc}
+                    </p>
+                  )}
                 </motion.div>
               );
             })}
@@ -357,162 +405,88 @@ export default function ServiceDetailView({ service }) {
       {/* =========================================================
           INTERACTIVE FREQUENTLY ASKED QUESTIONS (FAQ)
       ========================================================= */}
-      {Array.isArray(service.faqs) && service.faqs.length > 0 && (() => {
-        const firstFaq = service.faqs[0];
-        const remainingFaqs = service.faqs.slice(1);
+      {Array.isArray(service.faqs) && service.faqs.length > 0 && (
+        <section className="py-16 md:py-24 bg-white border-y border-[#004b28]/10">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            
+            <div className="text-center mb-14">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e181b5]">
+                Patient Clarity
+              </span>
+              <h2 className="mt-3 font-display italic text-3xl sm:text-4xl text-[#004b28]">
+                Frequently Asked <span className="not-italic font-serif">Questions</span>
+              </h2>
+              <p className="mt-3 text-sm sm:text-base text-[#1b2a26]/70">
+                Clear answers regarding procedures, recovery, and treatments.
+              </p>
+            </div>
 
-        return (
-          <section className="py-16 md:py-24 bg-white border-y border-[#004b28]/10">
-            <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-              
-              <div className="text-center mb-14">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#e181b5]">
-                  Patient Clarity
-                </span>
-                <h2 className="mt-3 font-display italic text-3xl sm:text-4xl text-[#004b28]">
-                  Frequently Asked <span className="not-italic font-serif">Questions</span>
-                </h2>
-                <p className="mt-3 text-sm sm:text-base text-[#1b2a26]/70">
-                  Clear answers regarding procedures, recovery, and treatments.
-                </p>
-              </div>
+            <div className="space-y-4">
+              {service.faqs.map((faq, idx) => {
+                const isOpen = !!openFaqs[idx];
 
-              <div className="space-y-4">
-                {/* 1ST QUESTION (ONLY THIS TITLE BAR SHOWN INITIALLY) */}
-                <div
-                  className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
-                    firstFaqOpen
-                      ? "border-[#004b28]/40 bg-white shadow-md"
-                      : "border-[#004b28]/15 bg-[#fbf5ee] hover:bg-white/80"
-                  }`}
-                >
-                  <button
-                    type="button"
-                    onClick={toggleFirstFaq}
-                    className="w-full px-6 py-5 flex items-center justify-between text-left gap-4"
+                return (
+                  <div
+                    key={idx}
+                    className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                      isOpen
+                        ? "border-[#004b28]/40 bg-white shadow-md"
+                        : "border-[#004b28]/15 bg-[#fbf5ee] hover:bg-white/80"
+                    }`}
                   >
-                    <div className="flex items-center gap-3.5">
-                      <span
-                        className={`h-7 px-2.5 rounded-full text-xs font-bold flex items-center justify-center shrink-0 transition-colors ${
-                          firstFaqOpen
-                            ? "bg-[#004b28] text-white"
-                            : "bg-[#004b28]/10 text-[#004b28]"
+                    <button
+                      type="button"
+                      onClick={() => toggleFaq(idx)}
+                      className="w-full px-6 py-5 flex items-center justify-between text-left gap-4 cursor-pointer"
+                    >
+                      <div className="flex items-center gap-3.5">
+                        <span
+                          className={`h-7 px-2.5 rounded-full text-xs font-bold flex items-center justify-center shrink-0 transition-colors ${
+                            isOpen
+                              ? "bg-[#004b28] text-white"
+                              : "bg-[#004b28]/10 text-[#004b28]"
+                          }`}
+                        >
+                          Q{String(idx + 1).padStart(2, "0")}
+                        </span>
+                        <span className="font-display italic text-lg sm:text-xl text-[#004b28] font-medium leading-snug">
+                          {faq.question}
+                        </span>
+                      </div>
+
+                      <div
+                        className={`h-9 w-9 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
+                          isOpen
+                            ? "rotate-180 bg-[#004b28] text-white shadow-sm"
+                            : "bg-[#004b28]/10 text-[#004b28] hover:bg-[#004b28] hover:text-white"
                         }`}
                       >
-                        Q01
-                      </span>
-                      <span className="font-display italic text-lg sm:text-xl text-[#004b28] font-medium leading-snug">
-                        {firstFaq.question}
-                      </span>
-                    </div>
+                        <ChevronDown size={18} />
+                      </div>
+                    </button>
 
-                    <div
-                      className={`h-9 w-9 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
-                        firstFaqOpen
-                          ? "rotate-180 bg-[#004b28] text-white shadow-sm"
-                          : "bg-[#004b28]/10 text-[#004b28] hover:bg-[#004b28] hover:text-white"
-                      }`}
-                    >
-                      <ChevronDown size={18} />
-                    </div>
-                  </button>
-
-                  <AnimatePresence>
-                    {firstFaqOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="px-6 pb-6 pt-2 text-sm sm:text-base text-[#1b2a26]/85 leading-relaxed font-light border-t border-[#004b28]/10 pl-6 sm:pl-16">
-                          {firstFaq.answer}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                {/* REMAINING QUESTIONS (REVEALED WHEN 1ST QUESTION DROPDOWN IS CLICKED) */}
-                <AnimatePresence>
-                  {firstFaqOpen && remainingFaqs.length > 0 && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4 }}
-                      className="space-y-4 pt-2 overflow-hidden"
-                    >
-                      {remainingFaqs.map((faq, idx) => {
-                        const index = idx + 1;
-                        const isChildOpen = !!openChildFaqs[index];
-
-                        return (
-                          <div
-                            key={index}
-                            className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
-                              isChildOpen
-                                ? "border-[#004b28]/40 bg-white shadow-md"
-                                : "border-[#004b28]/15 bg-[#fbf5ee] hover:bg-white/80"
-                            }`}
-                          >
-                            <button
-                              type="button"
-                              onClick={() => toggleChildFaq(index)}
-                              className="w-full px-6 py-5 flex items-center justify-between text-left gap-4"
-                            >
-                              <div className="flex items-center gap-3.5">
-                                <span
-                                  className={`h-7 px-2.5 rounded-full text-xs font-bold flex items-center justify-center shrink-0 transition-colors ${
-                                    isChildOpen
-                                      ? "bg-[#004b28] text-white"
-                                      : "bg-[#004b28]/10 text-[#004b28]"
-                                  }`}
-                                >
-                                  Q{String(index + 1).padStart(2, "0")}
-                                </span>
-                                <span className="font-display italic text-lg sm:text-xl text-[#004b28] font-medium leading-snug">
-                                  {faq.question}
-                                </span>
-                              </div>
-
-                              <div
-                                className={`h-9 w-9 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
-                                  isChildOpen
-                                    ? "rotate-180 bg-[#004b28] text-white shadow-sm"
-                                    : "bg-[#004b28]/10 text-[#004b28] hover:bg-[#004b28] hover:text-white"
-                                }`}
-                              >
-                                <ChevronDown size={18} />
-                              </div>
-                            </button>
-
-                            <AnimatePresence>
-                              {isChildOpen && (
-                                <motion.div
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: "auto", opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  transition={{ duration: 0.3 }}
-                                >
-                                  <div className="px-6 pb-6 pt-2 text-sm sm:text-base text-[#1b2a26]/85 leading-relaxed font-light border-t border-[#004b28]/10 pl-6 sm:pl-16">
-                                    {faq.answer}
-                                  </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <div className="px-6 pb-6 pt-2 text-sm sm:text-base text-[#1b2a26]/85 leading-relaxed font-light border-t border-[#004b28]/10 pl-6 sm:pl-16">
+                            {faq.answer}
                           </div>
-                        );
-                      })}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
             </div>
-          </section>
-        );
-      })()}
+
+          </div>
+        </section>
+      )}
 
       {/* =========================================================
           DOCTOR SPOTLIGHT CARD
@@ -540,17 +514,18 @@ export default function ServiceDetailView({ service }) {
 
               <div className="md:col-span-8 space-y-4 text-white/90">
                 <p className="text-sm sm:text-base leading-relaxed font-light">
-                  {drPriyanka.bio || "A highly distinguished specialist with over 14 years of clinical expertise, dedicated to combining advanced 3D laparoscopic surgical precision with compassionate maternal and fertility care."}
+                  {drPriyanka.bio || "A highly distinguished specialist dedicated to combining advanced 3D laparoscopic surgical precision with compassionate maternal and fertility care."}
                 </p>
 
                 <div className="pt-2 flex flex-wrap gap-3">
-                  <a
-                    href="tel:919079765578"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#e181b5] px-6 py-2.5 text-white font-medium text-sm hover:bg-[#d83b79] transition-all shadow-sm"
+                  <button
+                    type="button"
+                    onClick={() => setAppointmentModalOpen(true)}
+                    className="inline-flex items-center gap-2 rounded-full bg-[#e181b5] px-6 py-2.5 text-white font-medium text-sm hover:bg-[#d83b79] transition-all shadow-sm cursor-pointer"
                   >
                     <Calendar size={16} />
                     <span>Book Consultation</span>
-                  </a>
+                  </button>
                   <a
                     href={siteInfo.whatsapp.href}
                     target="_blank"
@@ -576,6 +551,11 @@ export default function ServiceDetailView({ service }) {
       <ExploreMoreSpecialities currentSlug={service.slug} />
       <Testimonials />
       <CTASection />
+
+      <AppointmentModal
+        isOpen={appointmentModalOpen}
+        onClose={() => setAppointmentModalOpen(false)}
+      />
     </main>
   );
 }

@@ -156,7 +156,7 @@ export default async function BlogDetailPage({ params }) {
                 className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#e181b5] text-white font-display italic text-lg hover:bg-[#004b28] transition-all duration-300 shadow-sm"
               >
                 <PhoneCall size={18} />
-                Call +91 90 7976 5578
+                Call +91 90797 65578
               </a>
             </div>
           </Reveal>
