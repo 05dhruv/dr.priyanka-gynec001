@@ -23,37 +23,66 @@ export default function HomeBlogs() {
             <Link
               key={post.slug}
               href={`/blogs/${post.slug}`}
-              className="group rounded-[28px] bg-[#f5e7d8] border border-[#ebd7c5] p-6 sm:p-7 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between cursor-pointer"
+              className="group rounded-[28px] bg-white border border-[#004b28]/15 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between cursor-pointer"
             >
-              {/* TOP ROW: DATE & CATEGORY */}
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="inline-flex items-center gap-1.5 bg-[#004b28]/10 text-[#004b28] text-xs font-semibold px-3 py-1 rounded-full border border-[#004b28]/15">
-                    <Calendar size={13} className="text-[#e181b5]" />
-                    {post.date}
-                  </span>
+              {/* TOP BANNER IMAGE CONTAINER */}
+              <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#004b28]/5 border-b border-[#004b28]/10">
+                {post.image ? (
+                  <>
+                    {/* Subtle blurred background fill */}
+                    <img
+                      src={post.image}
+                      alt=""
+                      aria-hidden="true"
+                      className="absolute inset-0 w-full h-full object-cover blur-md opacity-25 scale-110 pointer-events-none"
+                    />
+                    {/* Main image with object-cover object-center */}
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="relative z-10 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </>
+                ) : (
+                  <div className="w-full h-full bg-[#004b28]/10 flex items-center justify-center text-[#004b28]/40">
+                    <span>Banner Image</span>
+                  </div>
+                )}
 
-                  <span className="text-xs font-bold text-[#e181b5] uppercase tracking-wider">
+                {/* CATEGORY BADGE OVERLAY */}
+                <div className="absolute top-4 left-4 z-20">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#004b28] text-xs font-bold uppercase tracking-wider border border-[#004b28]/15 shadow-xs">
                     {post.category}
                   </span>
                 </div>
-
-                {/* TITLE */}
-                <h3 className="font-display italic font-normal text-xl sm:text-2xl text-[#004b28] group-hover:text-[#e181b5] transition-colors leading-snug mb-3 line-clamp-2">
-                  {post.title}
-                </h3>
-
-                {/* EXCERPT */}
-                <p className="text-[#1b4332]/80 text-sm leading-relaxed line-clamp-3 mb-6 font-light">
-                  {post.excerpt}
-                </p>
               </div>
 
-              {/* BOTTOM FOOTER LINK */}
-              <div className="pt-4 border-t border-[#004b28]/15 flex items-center justify-between text-sm text-[#004b28] font-display italic font-medium">
-                <span>Read Full Article</span>
-                <div className="w-8 h-8 rounded-full bg-[#004b28]/10 group-hover:bg-[#004b28] group-hover:text-white text-[#004b28] flex items-center justify-center transition-all">
-                  <ArrowRight size={15} />
+              {/* CARD CONTENT */}
+              <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-[#f5e7d8]/40">
+                <div>
+                  {/* DATE ROW */}
+                  <div className="flex items-center gap-2 mb-3 text-xs text-[#004b28]/70 font-medium">
+                    <Calendar size={13} className="text-[#e181b5]" />
+                    <span>{post.date}</span>
+                  </div>
+
+                  {/* TITLE */}
+                  <h3 className="font-display italic font-normal text-xl sm:text-2xl text-[#004b28] group-hover:text-[#e181b5] transition-colors leading-snug mb-3 line-clamp-2">
+                    {post.title}
+                  </h3>
+
+                  {/* EXCERPT */}
+                  <p className="text-[#1b4332]/80 text-sm leading-relaxed line-clamp-3 mb-6 font-light">
+                    {post.excerpt}
+                  </p>
+                </div>
+
+                {/* BOTTOM FOOTER LINK */}
+                <div className="pt-4 border-t border-[#004b28]/15 flex items-center justify-between text-sm text-[#004b28] font-display italic font-medium">
+                  <span>Read Full Article</span>
+                  <div className="w-8 h-8 rounded-full bg-[#004b28]/10 group-hover:bg-[#004b28] group-hover:text-white text-[#004b28] flex items-center justify-center transition-all">
+                    <ArrowRight size={15} />
+                  </div>
                 </div>
               </div>
             </Link>

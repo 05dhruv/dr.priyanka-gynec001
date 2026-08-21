@@ -83,6 +83,27 @@ export default async function BlogDetailPage({ params }) {
             </div>
           </Reveal>
 
+          {/* ARTICLE MAIN FEATURED BANNER IMAGE (100% UNCUT FULL IMAGE) */}
+          {post.image && (
+            <Reveal className="mb-10">
+              <div className="relative w-full rounded-3xl overflow-hidden border border-[#004b28]/15 shadow-md bg-[#004b28]/5 p-2 sm:p-4 md:p-6 flex items-center justify-center">
+                {/* Ambient Soft Blurred Fill */}
+                <img
+                  src={post.image}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-20 scale-110 pointer-events-none"
+                />
+                {/* Main 100% Full Uncut Image */}
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="relative z-10 w-full h-auto max-h-[520px] object-contain rounded-2xl shadow-sm"
+                />
+              </div>
+            </Reveal>
+          )}
+
           {/* KEY TAKEAWAYS BOX */}
           {Array.isArray(post.takeaways) && post.takeaways.length > 0 && (
             <Reveal className="mb-12">
@@ -173,17 +194,34 @@ export default async function BlogDetailPage({ params }) {
                   <Link
                     key={recPost.slug}
                     href={`/blogs/${recPost.slug}`}
-                    className="group block rounded-2xl bg-white border border-[#004b28]/15 p-6 hover:border-[#004b28]/30 hover:shadow-md transition-all duration-300"
+                    className="group block rounded-2xl bg-white border border-[#004b28]/15 overflow-hidden hover:border-[#004b28]/30 hover:shadow-md transition-all duration-300"
                   >
-                    <span className="text-xs font-semibold text-[#e181b5] uppercase tracking-wider block mb-2">
-                      {recPost.category}
-                    </span>
-                    <h4 className="font-serif text-[#004b28] text-xl leading-snug mb-2 group-hover:text-[#075540] transition-colors">
-                      {recPost.title}
-                    </h4>
-                    <p className="text-xs text-[#1b2a26]/70 line-clamp-2 font-light">
-                      {recPost.excerpt}
-                    </p>
+                    {recPost.image && (
+                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#004b28]/5 border-b border-[#004b28]/10">
+                        <img
+                          src={recPost.image}
+                          alt=""
+                          aria-hidden="true"
+                          className="absolute inset-0 w-full h-full object-cover blur-md opacity-25 scale-110 pointer-events-none"
+                        />
+                        <img
+                          src={recPost.image}
+                          alt={recPost.title}
+                          className="relative z-10 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                    )}
+                    <div className="p-6">
+                      <span className="text-xs font-semibold text-[#e181b5] uppercase tracking-wider block mb-2">
+                        {recPost.category}
+                      </span>
+                      <h4 className="font-serif text-[#004b28] text-xl leading-snug mb-2 group-hover:text-[#075540] transition-colors">
+                        {recPost.title}
+                      </h4>
+                      <p className="text-xs text-[#1b2a26]/70 line-clamp-2 font-light">
+                        {recPost.excerpt}
+                      </p>
+                    </div>
                   </Link>
                 ))}
               </div>

@@ -332,7 +332,7 @@ export default function Navbar() {
               duration: 0.35,
               ease: "easeInOut",
             }}
-            className="lg:hidden overflow-hidden bg-[#fbf5ee] border-t border-[#e181b5]/20 shadow-xl"
+            className="lg:hidden max-h-[calc(100dvh-75px)] overflow-y-auto overscroll-contain custom-scrollbar bg-[#fbf5ee] border-t border-[#e181b5]/20 shadow-xl"
           >
             <div className="px-6 py-6 flex flex-col gap-1">
               {navLinks.map((link) => {

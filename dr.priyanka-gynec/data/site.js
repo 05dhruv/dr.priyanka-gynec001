@@ -1237,7 +1237,7 @@ export const blogPosts = [
     readTime: "6 min read",
     author: "Dr. Priyanka",
     authorRole: "Senior Gynecologist & Fertility Specialist (MBBS, MS)",
-    image: "https://res.cloudinary.com/dv9tivfvq/image/upload/v1786608482/IMG_1_wx7atm.jpg",
+    image: "https://res.cloudinary.com/dv9tivfvq/image/upload/v1787293425/Gemini_Generated_Image_1b0lda1b0lda1b0l_nxqlrl.png",
     takeaways: [
       "PCOS causes irregular ovulation, but eggs remain healthy and responsive to medical care.",
       "70%+ of women with PCOS achieve successful pregnancy with oral ovulation medications alone.",
@@ -1273,7 +1273,7 @@ export const blogPosts = [
     readTime: "5 min read",
     author: "Dr. Priyanka",
     authorRole: "Laparoscopic Surgeon & Gynecologist (MBBS, MS)",
-    image: "https://res.cloudinary.com/dv9tivfvq/image/upload/v1786608482/IMG_1_wx7atm.jpg",
+    image: "https://res.cloudinary.com/dv9tivfvq/image/upload/v1787293425/Gemini_Generated_Image_585exs585exs585e_zcaq9n.png",
     takeaways: [
       "Endometriosis occurs when tissue similar to the uterine lining grows outside the uterus, causing pain and scarring.",
       "Minimal access 3D/4K laparoscopy allows 100% precise visualization and complete lesion removal.",
@@ -1309,7 +1309,7 @@ export const blogPosts = [
     readTime: "7 min read",
     author: "Dr. Priyanka",
     authorRole: "Consultant Obstetrician & Birthing Specialist (MBBS, MS)",
-    image: "https://res.cloudinary.com/dv9tivfvq/image/upload/v1786608482/IMG_1_wx7atm.jpg",
+    image: "https://res.cloudinary.com/dv9tivfvq/image/upload/v1787293484/Gemini_Generated_Image_ncma0qncma0qncma_wvam9e.png",
     takeaways: [
       "Trimester 1 focuses on early viability scans, folic acid supplementation, and NIPT/NT screening.",
       "Trimester 2 involves detailed anomaly ultrasounds (TIFFA) and monitoring fetal movements.",
